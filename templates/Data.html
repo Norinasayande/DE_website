@@ -1,0 +1,41 @@
+{% include 'navbar.html' %}
+
+<body>
+  <main class="content">
+
+    <section class="section">
+      <h2>Explore the Data </h2>
+      <div>
+        <p>
+        Below you can find data on greenhouse gas emissions due to agriculture as well as commodity driven deforestation in different countries. 
+        </p>
+        <p>
+          The data on <a href="https://di.unfccc.int/time_series?_gl=1*v36wdr*_ga*MzI2MTE2NDIwLjE3NDM1OTk5NTM.*_ga_7ZZWT14N79*czE3NDcwNDk4NjIkbzIkZzAkdDE3NDcwNDk4NjckajAkbDAkaDA."> greenhouse gas emmissions by agriculture </a>was colleted by the United Nations Framework Convention on Climate Change and the data on  <a href="https://ourworldindata.org/grapher/commodity-driven-deforestation?tab=table&time=earliest..latest"> commodity driven deforestation </a> collected by Global Forest Watch and processed mainly by <a href="https://ourworldindata.org/">Our World in Data </a>.
+        </p>
+      </div>
+     
+    </section>
+
+    <form method="POST" action="/data" id="countryForm">
+      <label for="country">Choose a country:</label>
+      <select name="country" id="country" onchange="document.getElementById('countryForm').submit();">
+        {% for country in countries %}
+          <option value="{{ country }}" {% if country == selected_country %}selected{% endif %}>{{ country }}</option>
+        {% endfor %}
+      </select>
+    </form>
+    
+  
+  {% if selected_country %}
+    <h2>{{ selected_country }}</h2>
+    <img src="{{ plot_url }}" alt="Data Plot">
+  {% endif %}
+  
+  </main>
+
+  <footer style="background-color: #f5f5f5; padding: 30px 0; text-align: center; font-size: 0.9rem; color: #444; margin-top: 60px; border-top: 1px solid #ddd;">
+    <p>© May 2025 — University of Amsterdam</p>
+    <p>Contact: <a href="mailto:norinaschmeiduch@student.uva.nl" style="color: #444; text-decoration: underline;">norinaschmeiduch@student.uva.nl</a></p>
+  </footer>
+  
+</body>
